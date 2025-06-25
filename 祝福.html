@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>梦前尘的生日祝福 - 桔梗主题</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: '楷体', 'KaiTi', 'STKaiti', serif;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            background: linear-gradient(135deg, #fff5f7, #ffebf3, #ffe1ee, #ffd7e9, #ffcde4);
+            overflow-x: hidden;
+        }
+        
+        /* 桔梗背景区域 */
+        .kikyo-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(255, 245, 247, 0.9) 0%, rgba(255, 235, 243, 0.85) 50%, rgba(255, 225, 238, 0.8) 100%);
+        }
+        
+        .kikyo-character {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            height: 90%;
+            opacity: 0.95;
+            transition: all 1s ease;
+            filter: drop-shadow(0 0 15px rgba(255, 182, 193, 0.6));
+        }
+        
+        .kikyo-character:hover {
+            opacity: 1;
+            filter: drop-shadow(0 0 25px rgba(255, 182, 193, 0.8));
+        }
+        
+        /* 内容容器 */
+        .container {
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            max-width: 800px;
+            padding: 30px;
+            margin: 20px;
+            backdrop-filter: blur(6px);
+            background: rgba(255, 250, 250, 0.7);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.4);
+            transition: transform 0.5s ease;
+        }
+        
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.6);
+        }
+        
+        .card {
+            padding: 40px 30px;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        h1 {
+            font-size: 4.2rem;
+            margin-bottom: 30px;
+            color: #d81b60;
+            letter-spacing: 3px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .birthday-name {
+            display: inline-block;
+            background: linear-gradient(to right, #d81b60, #ad1457);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0 15px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            animation: name-glow 4s infinite alternate;
+            position: relative;
+        }
+        
+        .birthday-name::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, #d81b60, #ad1457);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: right;
+            animation: underline 3s infinite alternate;
+        }
+        
+        .message {
+            font-size: 2.1rem;
+            line-height: 2.2;
+            margin: 40px 0;
+            text-align: center;
+            padding: 0 15px;
+            font-weight: bold;
+            color: #5a2a3a;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+        }
+        
+        .message p {
+            margin: 25px 0;
+            position: relative;
+            display: inline-block;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 15px;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 182, 193, 0.4);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .message p:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: scale(1.03);
+        }
+        
+        .signature {
+            margin-top: 40px;
+            font-size: 2rem;
+            color: #d81b60;
+            font-weight: bold;
+        }
+        
+        .signature .name {
+            font-size: 2.2rem;
+            display: inline-block;
+            padding: 0 15px;
+            background: linear-gradient(to right, #d81b60, #ad1457);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .signature .name::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #d81b60, #ad1457);
+            border-radius: 1px;
+        }
+        
+        .cake {
+            font-size: 5rem;
+            margin: 30px 0;
+            animation: pulse 3s infinite;
+            text-shadow: 0 0 15px rgba(255, 182, 193, 0.6);
+            color: #d81b60;
+        }
+        
+        /* 樱花花瓣样式 */
+        .sakura {
+            position: absolute;
+            top: -50px;
+            z-index: 1;
+            color: #ffb6c1;
+            font-size: 28px;
+            opacity: 0.8;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+        
+        /* 花瓣飘落动画 */
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* 卡片浮动效果 */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        /* 蛋糕跳动效果 */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                text-shadow: 0 0 10px rgba(255, 182, 193, 0.6);
+            }
+            50% {
+                transform: scale(1.15);
+                text-shadow: 0 0 20px rgba(216, 27, 96, 0.8);
+            }
+            100% {
+                transform: scale(1);
+                text-shadow: 0 0 10px rgba(255, 182, 193, 0.6);
+            }
+        }
+        
+        @keyframes name-glow {
+            0% {
+                text-shadow: 0 0 5px rgba(216, 27, 96, 0.2);
+            }
+            100% {
+                text-shadow: 0 0 15px rgba(216, 27, 96, 0.4);
+            }
+        }
+        
+        @keyframes underline {
+            0% {
+                transform: scaleX(0);
+                transform-origin: right;
+            }
+            100% {
+                transform: scaleX(1);
+                transform-origin: left;
+            }
+        }
+        
+        /* 音乐控制按钮 */
+        .music-control {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 100;
+            background: rgba(216, 27, 96, 0.8);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 182, 193, 0.7);
+            transition: all 0.3s ease;
+        }
+        
+        .music-control:hover {
+            transform: scale(1.1);
+            background: rgba(173, 20, 87, 0.9);
+            box-shadow: 0 0 25px rgba(255, 182, 193, 0.9);
+        }
+        
+        .music-control i {
+            font-size: 28px;
+            color: white;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .message {
+                font-size: 1.7rem;
+                line-height: 1.8;
+            }
+            
+            .signature {
+                font-size: 1.6rem;
+            }
+            
+            .signature .name {
+                font-size: 1.8rem;
+            }
+            
+            .cake {
+                font-size: 4rem;
+            }
+            
+            .kikyo-character {
+                height: 60%;
+                opacity: 0.8;
+            }
+            
+            .container {
+                padding: 20px;
+                margin: 15px;
+            }
+        }
+        
+               /* 主题切换按钮 */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(255, 250, 250, 0.8);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 182, 193, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .theme-toggle i {
+            font-size: 24px;
+            color: #d81b60;
+        }
+        
+        /* 唯美光点特效 */
+        .light-point {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.9);
+            animation: twinkle 3s infinite;
+            z-index: 0;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0.2; transform: scale(0.5); }
+        }
+        
+        /* 祝福语动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 页面标题 */
+        .page-title {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #d81b60;
+            font-size: 1.8rem;
+            text-align: center;
+            z-index: 100;
+            background: rgba(255, 250, 250, 0.7);
+            padding: 8px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面标题 -->
+    <div class="page-title">生日祝福</div>
+    
+    <!-- 桔梗背景区域 -->
+    <div class="kikyo-background">
+        <img src="https://c-ssl.dtstatic.com/uploads/blog/202108/16/20210816224726_b06b8.thumb.1000_0.jpg" alt="桔梗" class="kikyo-character" id="animeCharacter">
+    </div>
+    
+       <!-- 主题切换 -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+    
+    <div class="container">
+        <div class="card">
+            <h1>生日快乐，<span class="birthday-name">梦前尘</span>！</h1>
+            
+            <div class="cake">🎂</div>
+            
+            <div class="message">
+                <p><span>寻常岁月皆晴好</span>，</p>
+                <p><span>朝暮欢然似酣甘</span>。</p>
+                <p><span>唯怜六月初九夜</span>，</p>
+                <p><span>榴花似梦月嫣然</span>。</p>
+            </div>
+            
+            <div class="signature">
+                最真挚的祝福来自 <span class="name">玉牌大人</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 音乐控制 -->
+    <div class="music-control" id="musicControl">
+        <i class="fas fa-music"></i>
+    </div>
+    
+    <audio id="bgMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-439.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+        // 创建樱花花瓣
+        function createSakura() {
+            const sakura = document.createElement('div');
+            sakura.innerHTML = '🌸';
+            sakura.classList.add('sakura');
+            
+            // 随机设置花瓣的初始位置
+            sakura.style.left = Math.random() * 100 + 'vw';
+            
+            // 随机设置动画时长（3秒到8秒）
+            sakura.style.animationDuration = (Math.random() * 5 + 3) + 's';
+            
+            // 随机设置花瓣大小（20px到40px）
+            sakura.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            
+            // 随机设置一点旋转延迟
+            sakura.style.animationDelay = Math.random() * 3 + 's';
+            
+            // 把花瓣添加到页面上
+            document.body.appendChild(sakura);
+            
+            // 花瓣动画结束后移除它
+            setTimeout(() => {
+                sakura.remove();
+            }, 10000);
+        }
+        
+        // 创建唯美光点
+        function createLightPoint() {
+            const light = document.createElement('div');
+            light.classList.add('light-point');
+            
+            // 随机设置光点位置
+            light.style.left = Math.random() * 100 + 'vw';
+            light.style.top = Math.random() * 100 + 'vh';
+            
+            // 随机设置动画延迟
+            light.style.animationDelay = Math.random() * 3 + 's';
+            
+            // 随机设置大小
+            const size = Math.random() * 8 + 4;
+            light.style.width = size + 'px';
+            light.style.height = size + 'px';
+            
+            document.body.appendChild(light);
+            
+            // 一段时间后移除
+            setTimeout(() => {
+                light.remove();
+            }, 15000);
+        }
+        
+        // 每隔一段时间创建一个新的花瓣
+        setInterval(createSakura, 200);
+        
+        // 每隔一段时间创建一个新的光点
+        setInterval(createLightPoint, 300);
+        
+        // 初始创建一些花瓣和光点
+        for (let i = 0; i < 30; i++) {
+            setTimeout(createSakura, Math.random() * 3000);
+            setTimeout(createLightPoint, Math.random() * 3000);
+        }
+        
+        // 音乐控制
+        const musicControl = document.getElementById('musicControl');
+        const bgMusic = document.getElementById('bgMusic');
+        let musicPlaying = false;
+        
+        musicControl.addEventListener('click', () => {
+            if (musicPlaying) {
+                bgMusic.pause();
+                musicControl.innerHTML = '<i class="fas fa-music"></i>';
+            } else {
+                bgMusic.play().catch(e => {
+                    console.log('自动播放被阻止，需要用户交互:', e);
+                });
+                musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            musicPlaying = !musicPlaying;
+        });
+        
+        // 添加用户交互后自动播放音乐的选项
+        document.body.addEventListener('click', function initMusic() {
+            if (!musicPlaying) {
+                bgMusic.play().catch(e => console.log(e));
+                musicPlaying = true;
+                musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            document.body.removeEventListener('click', initMusic);
+        });
+        
+        // 角色选择功能
+        const characterOptions = document.querySelectorAll('.character-option');
+        const animeCharacter = document.getElementById('animeCharacter');
+        
+        characterOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // 更新活动状态
+                characterOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 更新角色图片
+                const imgSrc = this.getAttribute('data-img');
+                animeCharacter.src = imgSrc;
+                
+                // 添加动画效果
+                animeCharacter.style.opacity = '0';
+                setTimeout(() => {
+                    animeCharacter.style.opacity = '0.95';
+                    animeCharacter.style.transition = 'opacity 0.8s ease';
+                }, 50);
+            });
+        });
+        
+        // 添加诗句淡入效果
+        const poemLines = document.querySelectorAll('.message p');
+        poemLines.forEach((line, index) => {
+            line.style.opacity = '0';
+            line.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                line.style.transition = 'opacity 1.5s ease, transform 1.5s ease';
+                line.style.opacity = '1';
+                line.style.transform = 'translateY(0)';
+            }, 800 + index * 600);
+        });
+        
+        // 添加名字高亮效果
+        const birthdayName = document.querySelector('.birthday-name');
+        setInterval(() => {
+            birthdayName.style.animation = 'none';
+            setTimeout(() => {
+                birthdayName.style.animation = 'name-glow 4s infinite alternate, underline 3s infinite alternate';
+            }, 10);
+        }, 5000);
+        
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        let isLightTheme = true;
+        
+        themeToggle.addEventListener('click', () => {
+            isLightTheme = !isLightTheme;
+            
+            if (isLightTheme) {
+                document.body.style.background = 'linear-gradient(135deg, #fff5f7, #ffebf3, #ffe1ee, #ffd7e9, #ffcde4)';
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                document.body.style.background = 'linear-gradient(135deg, #1a0a14, #2a0a1f, #3a0a2a)';
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        });
+    </script>
+</body>
+</html>
