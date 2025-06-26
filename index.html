@@ -40,26 +40,75 @@
             align-items: center;
         }
         
-        /* 背景图片 - 修复居中问题 */
+        /* 背景图片 - 关键修改：放大到尽可能覆盖页面 */
         .kikyo-character {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            max-height: 90%;
-            max-width: 90%;
-            bottom: auto;
-            right: auto;
+            /* 修改为自动尺寸，图片将尽可能放大 */
+            width: auto;
+            height: auto;
+            /* 设置最小尺寸确保覆盖 */
+            min-width: 100%;
+            min-height: 100%;
+            /* 限制最大尺寸防止过度放大 */
+            max-width: 120%;
+            max-height: 120%;
             object-fit: contain;
             opacity: 0.95;
             transition: all 1s ease;
             filter: drop-shadow(0 0 15px rgba(255, 182, 193, 0.6));
         }
         
-        .kikyo-character:hover {
-            opacity: 1;
-            filter: drop-shadow(0 0 25px rgba(255, 182, 193, 0.8));
+        /* 移除所有媒体查询中关于图片尺寸的限制 */
+        @media (max-width: 1200px) {
+            /* 移除图片尺寸限制 */
         }
+        
+        @media (max-width: 992px) {
+            /* 移除图片尺寸限制 */
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .message {
+                font-size: 1.7rem;
+                line-height: 1.8;
+            }
+            
+            .signature {
+                font-size: 1.6rem;
+            }
+            
+            .signature .name {
+                font-size: 1.8rem;
+            }
+            
+            .cake {
+                font-size: 4rem;
+            }
+            
+            .container {
+                padding: 20px;
+                margin: 15px;
+            }
+            
+            /* 移动端增加最大尺寸限制 */
+            .kikyo-character {
+                max-width: 150%;
+                max-height: 150%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* 移动端增加最大尺寸限制 */
+            .kikyo-character {
+                max-width: 200%;
+                max-height: 200%;
         
         /* 内容容器 */
         .container {
