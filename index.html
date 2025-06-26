@@ -25,7 +25,7 @@
             overflow-x: hidden;
         }
         
-        /* 桔梗背景区域 - 添加背景颜色备用 */
+        /* 桔梗背景区域 */
         .kikyo-background {
             position: absolute;
             top: 0;
@@ -35,81 +35,32 @@
             z-index: -1;
             overflow: hidden;
             background: linear-gradient(135deg, rgba(255, 245, 247, 0.9) 0%, rgba(255, 235, 243, 0.85) 50%, rgba(255, 225, 238, 0.8) 100%);
-            /* 新增关键属性 */
             display: flex;
             justify-content: center;
             align-items: center;
         }
         
-        /* 背景图片优化 - 关键修改 */
+        /* 背景图片 - 修复居中问题 */
         .kikyo-character {
             position: absolute;
-            /* 居中定位 */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            /* 尺寸调整 */
             max-height: 90%;
             max-width: 90%;
-            /* 移除旧定位 */
             bottom: auto;
             right: auto;
-            /* 保留其他属性 */
             object-fit: contain;
             opacity: 0.95;
             transition: all 1s ease;
             filter: drop-shadow(0 0 15px rgba(255, 182, 193, 0.6));
         }
-        /* 修复3：媒体查询中的调整 */
-        @media (max-width: 1200px) {
-            .kikyo-character {
-                max-width: 60%;
-                max-height: 80%;
-                /* 确保移除旧定位 */
-                bottom: auto;
-                right: auto;
-                /* 保持居中 */
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-        }
-          @media (max-width: 992px) {
-            .kikyo-character {
-                max-width: 65%;
-                max-height: 75%;
-                bottom: auto;
-                right: auto;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
+        
+        .kikyo-character:hover {
+            opacity: 1;
+            filter: drop-shadow(0 0 25px rgba(255, 182, 193, 0.8));
         }
         
-        @media (max-width: 768px) {
-            .kikyo-character {
-                max-width: 85%;
-                max-height: 60%;
-                opacity: 0.8;
-                bottom: auto;
-                right: auto;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .kikyo-character {
-                max-width: 95%;
-                max-height: 50%;
-                bottom: auto;
-                right: auto;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-        }
         /* 内容容器 */
         .container {
             position: relative;
@@ -336,11 +287,16 @@
             color: white;
         }
         
-        /* 响应式设计 - 优化图片尺寸 */
+        /* 响应式设计 - 统一修改所有媒体查询 */
         @media (max-width: 1200px) {
             .kikyo-character {
                 max-width: 60%;
                 max-height: 80%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                bottom: auto;
+                right: auto;
             }
         }
         
@@ -348,6 +304,11 @@
             .kikyo-character {
                 max-width: 65%;
                 max-height: 75%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                bottom: auto;
+                right: auto;
             }
         }
         
@@ -373,11 +334,15 @@
                 font-size: 4rem;
             }
             
-            /* 移动端优化图片尺寸 */
             .kikyo-character {
                 max-width: 85%;
                 max-height: 60%;
                 opacity: 0.8;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                bottom: auto;
+                right: auto;
             }
             
             .container {
@@ -390,6 +355,11 @@
             .kikyo-character {
                 max-width: 95%;
                 max-height: 50%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                bottom: auto;
+                right: auto;
             }
         }
         
@@ -472,8 +442,9 @@
         /* 图片加载失败提示 */
         .image-fallback {
             position: absolute;
-            bottom: 0;
-            right: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             max-width: 70%;
             max-height: 90%;
             display: flex;
@@ -590,8 +561,8 @@
             }, 15000);
         }
         
-        // 每隔一段时间创建一个新的花瓣
-        setInterval(createSakura, 150);
+        // 每隔一段时间创建一个新的花瓣（增加樱花数量）
+        setInterval(createSakura, 100);
         
         // 每隔一段时间创建一个新的光点
         setInterval(createLightPoint, 300);
