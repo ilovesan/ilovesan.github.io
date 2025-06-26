@@ -40,11 +40,12 @@
         /* 背景图片优化 - 关键修改 */
         .kikyo-character {
             position: absolute;
-            bottom: 0;
-            right: 0;
+             top: 50%;
+           left: 50%;
+             transform: translate(-50%, -50%)
             /* 使用最大尺寸限制 */
             max-height: 90%;
-            max-width: 70%;
+            max-width: 90%;
             /* 保持图片比例 */
             object-fit: contain;
             opacity: 0.95;
@@ -538,7 +539,7 @@
         }
         
         // 每隔一段时间创建一个新的花瓣
-        setInterval(createSakura, 200);
+        setInterval(createSakura, 150);
         
         // 每隔一段时间创建一个新的光点
         setInterval(createLightPoint, 300);
