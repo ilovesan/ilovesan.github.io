@@ -425,35 +425,44 @@
             display: none; /* 默认隐藏 */
         }
         
-        /* 调试信息 */
-        .debug-info {
+        /* 状态提示 */
+        .status-message {
             position: fixed;
-            bottom: 10px;
-            left: 10px;
+            top: 20px;
+            left: 20px;
             background: rgba(0,0,0,0.7);
             color: white;
-            padding: 10px;
+            padding: 10px 15px;
             border-radius: 5px;
-            font-size: 12px;
+            font-size: 14px;
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .status-message.success {
+            background: rgba(46, 204, 113, 0.8);
+        }
+        
+        .status-message.error {
+            background: rgba(231, 76, 60, 0.8);
         }
     </style>
 </head>
 <body>
     <!-- 添加背景图片容器 -->
     <div class="kikyo-background">
-        <img src="images/kikyo.jpg" 
-             alt="桔梗主题背景" 
-             class="kikyo-character" 
-             id="kikyoImage">
+        <img src="images/kikyo.jpg" alt="桔梗主题背景" class="kikyo-character" id="kikyoImage">
         <div class="image-fallback" id="imageFallback">
             背景图片加载失败，请检查图片路径
         </div>
     </div>
     
-    <!-- 调试信息 -->
-    <div class="debug-info" id="debugInfo">
-        背景图片状态: <span id="imageStatus">加载中...</span>
+    <!-- 状态提示 -->
+    <div class="status-message" id="statusMessage">
+        <i class="fas fa-spinner fa-spin"></i>
+        <span>正在加载背景图片...</span>
     </div>
     
     <!-- 主题切换 -->
@@ -486,25 +495,40 @@
     </div>
     
     <audio id="bgMusic" loop>
-        <!-- 修改音乐文件为本地路径 -->
         <source src="audio/firefly.mp3" type="audio/mpeg">
     </audio>
     
     <script>
         // 图片加载状态检测
         const kikyoImage = document.getElementById('kikyoImage');
-        const imageStatus = document.getElementById('imageStatus');
+        const statusMessage = document.getElementById('statusMessage');
         const imageFallback = document.getElementById('imageFallback');
         
         kikyoImage.onload = function() {
-            imageStatus.textContent = '加载成功';
-            imageStatus.style.color = '#4CAF50';
+            statusMessage.innerHTML = '<i class="fas fa-check-circle"></i> 背景图片加载成功';
+            statusMessage.classList.add('success');
+            
+            // 3秒后隐藏提示
+            setTimeout(() => {
+                statusMessage.style.opacity = '0';
+                setTimeout(() => {
+                    statusMessage.style.display = 'none';
+                }, 500);
+            }, 3000);
         };
         
         kikyoImage.onerror = function() {
-            imageStatus.textContent = '加载失败';
-            imageStatus.style.color = '#f44336';
+            statusMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> 背景图片加载失败';
+            statusMessage.classList.add('error');
             imageFallback.style.display = 'flex';
+            
+            // 5秒后隐藏提示
+            setTimeout(() => {
+                statusMessage.style.opacity = '0';
+                setTimeout(() => {
+                    statusMessage.style.display = 'none';
+                }, 500);
+            }, 5000);
         };
         
         // 创建樱花花瓣
@@ -636,11 +660,6 @@
                 themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
             }
         });
-        
-        // 5秒后隐藏调试信息
-        setTimeout(() => {
-            document.getElementById('debugInfo').style.opacity = '0.3';
-        }, 5000);
     </script>
 </body>
 </html>
