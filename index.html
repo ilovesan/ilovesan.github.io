@@ -25,8 +25,8 @@
             overflow-x: hidden;
         }
         
-        /* 桔梗背景区域 */
-        .kikyo-background {
+        /* 桔梗背景区域 - 添加背景颜色备用 */
+         .kikyo-background {
             position: absolute;
             top: 0;
             left: 0;
@@ -427,16 +427,6 @@
     </style>
 </head>
 <body>
-    <!-- 页面标题 -->
-    <div class="page-title">生日祝福</div>
-    
-    <!-- 桔梗背景区域 -->
-    <div class="kikyo-background">
-        <!-- 添加备用图片加载提示 -->
-        <img src="images/kikyo.jpg" alt="桔梗" class="kikyo-character" 
-             onerror="this.style.display='none'; document.getElementById('imageFallback').style.display='flex';">
-        <div class="image-fallback" id="imageFallback">
-            桔梗图片加载失败<br>但仍送上最美的祝福
         </div>
     </div>
     
@@ -527,8 +517,8 @@
             }, 15000);
         }
         
-        // 每隔一段时间创建一个新的花瓣（增加樱花数量）
-        setInterval(createSakura, 100);
+        // 每隔一段时间创建一个新的花瓣
+        setInterval(createSakura, 150);
         
         // 每隔一段时间创建一个新的光点
         setInterval(createLightPoint, 300);
