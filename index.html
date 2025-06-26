@@ -25,7 +25,7 @@
             overflow-x: hidden;
         }
         
-        /* 桔梗背景区域 */
+        /* 桔梗背景区域 - 添加背景颜色备用 */
         .kikyo-background {
             position: absolute;
             top: 0;
@@ -37,11 +37,16 @@
             background: linear-gradient(135deg, rgba(255, 245, 247, 0.9) 0%, rgba(255, 235, 243, 0.85) 50%, rgba(255, 225, 238, 0.8) 100%);
         }
         
+        /* 背景图片优化 - 关键修改 */
         .kikyo-character {
             position: absolute;
             bottom: 0;
             right: 0;
-            height: 90%;
+            /* 使用最大尺寸限制 */
+            max-height: 90%;
+            max-width: 70%;
+            /* 保持图片比例 */
+            object-fit: contain;
             opacity: 0.95;
             transition: all 1s ease;
             filter: drop-shadow(0 0 15px rgba(255, 182, 193, 0.6));
@@ -278,7 +283,21 @@
             color: white;
         }
         
-        /* 响应式设计 */
+        /* 响应式设计 - 优化图片尺寸 */
+        @media (max-width: 1200px) {
+            .kikyo-character {
+                max-width: 60%;
+                max-height: 80%;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .kikyo-character {
+                max-width: 65%;
+                max-height: 75%;
+            }
+        }
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 3rem;
@@ -301,8 +320,10 @@
                 font-size: 4rem;
             }
             
+            /* 移动端优化图片尺寸 */
             .kikyo-character {
-                height: 60%;
+                max-width: 85%;
+                max-height: 60%;
                 opacity: 0.8;
             }
             
@@ -312,7 +333,14 @@
             }
         }
         
-               /* 主题切换按钮 */
+        @media (max-width: 480px) {
+            .kikyo-character {
+                max-width: 95%;
+                max-height: 50%;
+            }
+        }
+        
+        /* 主题切换按钮 */
         .theme-toggle {
             position: fixed;
             top: 20px;
@@ -387,6 +415,25 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             font-weight: bold;
         }
+        
+        /* 图片加载失败提示 */
+        .image-fallback {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            max-width: 70%;
+            max-height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d81b60;
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 250, 250, 0.8);
+            border-radius: 10px;
+            z-index: 5;
+        }
     </style>
 </head>
 <body>
@@ -395,10 +442,15 @@
     
     <!-- 桔梗背景区域 -->
     <div class="kikyo-background">
-       <img src="images/kikyo.jpg" alt="桔梗" class="kikyo-character">
+        <!-- 添加备用图片加载提示 -->
+        <img src="images/kikyo.jpg" alt="桔梗" class="kikyo-character" 
+             onerror="this.style.display='none'; document.getElementById('imageFallback').style.display='flex';">
+        <div class="image-fallback" id="imageFallback">
+            桔梗图片加载失败<br>但仍送上最美的祝福
+        </div>
     </div>
     
-       <!-- 主题切换 -->
+    <!-- 主题切换 -->
     <div class="theme-toggle" id="themeToggle">
         <i class="fas fa-moon"></i>
     </div>
@@ -428,8 +480,8 @@
     </div>
     
     <audio id="bgMusic" loop>
-        <<!-- 修改音乐文件为本地路径 -->
-<source src="audio/firefly.mp3" type="audio/mpeg">
+        <!-- 修改音乐文件为本地路径 -->
+        <source src="audio/firefly.mp3" type="audio/mpeg">
     </audio>
     
     <script>
@@ -525,29 +577,6 @@
             document.body.removeEventListener('click', initMusic);
         });
         
-        // 角色选择功能
-        const characterOptions = document.querySelectorAll('.character-option');
-        const animeCharacter = document.getElementById('animeCharacter');
-        
-        characterOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                // 更新活动状态
-                characterOptions.forEach(opt => opt.classList.remove('active'));
-                this.classList.add('active');
-                
-                // 更新角色图片
-                const imgSrc = this.getAttribute('data-img');
-                animeCharacter.src = imgSrc;
-                
-                // 添加动画效果
-                animeCharacter.style.opacity = '0';
-                setTimeout(() => {
-                    animeCharacter.style.opacity = '0.95';
-                    animeCharacter.style.transition = 'opacity 0.8s ease';
-                }, 50);
-            });
-        });
-        
         // 添加诗句淡入效果
         const poemLines = document.querySelectorAll('.message p');
         poemLines.forEach((line, index) => {
@@ -585,6 +614,9 @@
                 themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
             }
         });
+        
+        // 图片加载失败处理
+        document.getElementById('imageFallback').style.display = 'none';
     </script>
 </body>
 </html>
